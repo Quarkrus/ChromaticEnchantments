@@ -1,6 +1,7 @@
 package com.chromanyan.chromaticenchantments.mixin;
 
 import com.chromanyan.chromaticenchantments.init.ModEnchantments;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
@@ -30,7 +31,7 @@ public abstract class MixinItemEntity {
 
     @Inject(method = "hurt", at = @At("HEAD"), cancellable = true)
     private void hurt(DamageSource pSource, float pAmount, CallbackInfoReturnable<Boolean> cir) {
-        if (chromaticEnchantments$hasPersistenceEnchantment() && !pSource.isBypassInvul()) {
+        if (chromaticEnchantments$hasPersistenceEnchantment() && !pSource.is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
             cir.setReturnValue(false);
         }
     }

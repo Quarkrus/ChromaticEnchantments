@@ -8,6 +8,7 @@ import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotResult;
 
 import java.util.List;
+import java.util.Optional;
 
 public class ChromaticEnchantmentHelper {
 
@@ -20,10 +21,12 @@ public class ChromaticEnchantmentHelper {
     public static int getCuriosEnchantmentLevel(Enchantment enchantment, LivingEntity livingEntity) {
         if (!ModList.get().isLoaded("curios")) return 0;
 
-        List<SlotResult> validCurios = CuriosApi.getCuriosHelper().findCurios(livingEntity, itemStack -> itemStack.getEnchantmentLevel(enchantment) > 0);
+        Optional<List<SlotResult>> maybeValidCurios = CuriosApi.getCuriosInventory(livingEntity).map(inv -> inv.findCurios(itemStack -> itemStack.getEnchantmentLevel(enchantment) > 0));
+
+        if (maybeValidCurios.isEmpty()) return 0;
 
         int total = 0;
-        for (SlotResult result : validCurios) {
+        for (SlotResult result : maybeValidCurios.get()) {
             total += result.stack().getEnchantmentLevel(enchantment);
         }
 

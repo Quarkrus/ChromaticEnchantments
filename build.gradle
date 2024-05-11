@@ -12,7 +12,7 @@ buildscript {
 plugins {
     id 'eclipse'
     id 'idea'
-    id 'net.minecraftforge.gradle' version '[6.0.16,6.2)'
+    id 'net.neoforged.gradle' version '[6.0.18,6.2)'
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
 }
 
@@ -171,18 +171,16 @@ dependencies {
     // The "userdev" classifier will be requested and setup by ForgeGradle.
     // If the group id is "net.minecraft" and the artifact id is one of ["client", "server", "joined"],
     // then special handling is done to allow a setup of a vanilla dependency without the use of an external repository.
-    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+    minecraft "net.neoforged:forge:${minecraft_version}-${forge_version}"
 
-    implementation fg.deobf("top.theillusivec4.curios:curios-forge:1.19.2-5.1.4.4")
-    implementation fg.deobf("top.theillusivec4.caelus:caelus-forge:1.19.2-3.0.0.6")
-    runtimeOnly fg.deobf("curse.maven:elytra-slot-317716:4519258") // 6.1.1
+    implementation fg.deobf("top.theillusivec4.curios:curios-forge:5.9.0+1.20.1")
+    implementation fg.deobf("curse.maven:caelus-308989:5281700") // 3.2.0
+    runtimeOnly fg.deobf("curse.maven:elytra-slot-317716:4598379") // 6.3.0
 
     runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
 
-    runtimeOnly fg.deobf("curse.maven:catalogue-459701:4171024") // catalogue 1.7.0
-
-    runtimeOnly fg.deobf("curse.maven:bookshelf-228525:4556697") // bookshelf 16.3.20
-    runtimeOnly fg.deobf("curse.maven:enchantment-descriptions-250419:4277356") // enchantment descriptions 13.0.14
+    runtimeOnly fg.deobf("curse.maven:bookshelf-228525:5250293") // 20.1.10
+    runtimeOnly fg.deobf("curse.maven:enchantment-descriptions-250419:5136988") // enchantment descriptions 17.0.14
 
     // Example mod dependency with JEI - using fg.deobf() ensures the dependency is remapped to your development mappings
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
